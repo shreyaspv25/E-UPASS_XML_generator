@@ -1,0 +1,26 @@
+#!/bin/bash
+# Check Depedencies of libreoffice , elinks and zenity
+cat > $PWD/install.c << 'end of cfile'
+#include<stdio.h>
+#include<stdlib.h>
+#include<unistd.h>
+int main()
+{
+system("bash ./start.sh 2>/dev/null");
+return 0;
+}
+end of cfile
+if [ -e $PWD/install.c ]
+then
+	gcc $PWD/install.c -o $PWD/eupassxmlgen
+fi
+rm $PWD/install.c
+echo "[Desktop Entry]
+Version=1.0
+Name=e-UPaSS
+Comment=e-UPaSS
+Type=Application
+Terminal=true
+Icon=$PWD/icon/xml.png
+Exec=$PWD/eupassxmlgen" > $PWD/uploadprocessor.desktop
+chmod a+x $PWD/uploadprocessor.desktop
