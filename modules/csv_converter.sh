@@ -4,7 +4,6 @@ selected_file=$(zenity --title="File Selector" --file-selection --file-filter=*.
 if [ $? -eq 0 ]
 then 
 	{
-		fname=$(echo $selected_file | basename $selected_file | awk -F "." '{ print $1 }')
 		libreoffice --headless --convert-to csv --outdir $PWD $selected_file > /dev/null 2>/dev/null
 		if [ $? -ne 0 ]
 		then 
