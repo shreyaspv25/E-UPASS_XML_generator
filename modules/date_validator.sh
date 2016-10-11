@@ -4,7 +4,12 @@ touch $PWD/mod_date
 touch $PWD/date_err
 touch $PWD/date_errors
 type=$(ls | grep .*_new.csv | cut -d"_" -f1)
-cat $PWD/"$type"_new.csv | awk -F "|" '{ printf("%s\n",$4)}' | awk -F "/" '{printf("%s/%s/%s\n",$2,$1,$3)}' >> $PWD/mod_date
+if ( [ $1 == "purchases" ] || [ $1 == "sales" ] )
+then
+	cat $PWD/"$type"_new.csv | awk -F "|" '{ printf("%s\n",$4)}' | awk -F "/" '{printf("%s/%s/%s\n",$2,$1,$3)}' >> $PWD/mod_date
+else
+	cat $PWD/"$type"_new.csv | awk -F "|" '{ printf("%s\n",$5)}' | awk -F "/" '{printf("%s/%s/%s\n",$2,$1,$3)}' >> $PWD/mod_date
+fi
 date_cnt=$(wc -l < $PWD/mod_date)
 for i in `cat $PWD/mod_date`
 do

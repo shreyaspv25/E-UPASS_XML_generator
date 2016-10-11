@@ -1,6 +1,6 @@
 #!/bin/bash
 cd $HOME/.temp_process/$1
-selected_file=$(zenity --title="File Selector" --file-selection --file-filter=*.ods * --file-filter=.*xlsx --file-filter=*.xls)
+selected_file=$(zenity --title="File Selector" --file-selection --file-filter=*.ods --file-filter=*.xlsx --file-filter=*.xls)
 if [ $? -eq 0 ]
 then 
 	{

@@ -140,7 +140,7 @@ fi
 touch $1/purchases/LP_GEN_M"$purchases_ret_month".xml
 # XML headers
 echo -e "\
-<SaleDetails>\n\
+<PurchaseDetails>\n\
 <Version>13.11</Version>\n\
 <TinNo>$purchases_our_tin</TinNo>\n\
 <RetPerdEnd>2016</RetPerdEnd>\n\
@@ -149,19 +149,19 @@ echo -e "\
 #XML body
 cat $1/purchases/purchase_new.csv | sed 's/\//|/g' | awk -F "|" \
 '{
-printf("<SaleInvoiceDetails>\n\
-<PurTin>%s</PurTin>\n\
-<PurName>%s</PurName>\n\
+printf("<PurchaseInvoiceDetails>\n\
+<SelTin>%s</SelTin>\n\
+<SelName>%s</SelName>\n\
 <InvNo>%s</InvNo>\n\
 <InvDate>%s-%s-%s</InvDate>\n\
 <NetVal>%.2f</NetVal>\n\
 <TaxCh>%.2f</TaxCh>\n\
 <OthCh>%.2f</OthCh>\n\
 <TotCh>%.2f</TotCh>\n\
-</SaleInvoiceDetails>\n",$1,$2,$3,$6,$5,$4,$7,$8,$9,$10)
+</PurchaseInvoiceDetails>\n",$1,$2,$3,$6,$5,$4,$7,$8,$9,$10)
 }' >> $1/purchases/LP_GEN_M"$purchases_ret_month".xml
 # XML End
-echo -e "</SaleDetails>" >> $1/purchases/LP_GEN_M"$purchases_ret_month".xml
+echo -e "</PurchaseDetails>" >> $1/purchases/LP_GEN_M"$purchases_ret_month".xml
 if [ $(echo $(ls -l $1/purchases/LP_GEN_M"$purchases_ret_month".xml) | cut -d" " -f5) -ne 0 ]
 then
 	cp $1/purchases/LP_GEN_M"$purchases_ret_month".xml $HOME
@@ -178,7 +178,7 @@ fi
 touch $1/purchases/summary
 echo -e "DEALER NAME --> $our_name" >> $1/purchases/summary
 echo -e "DEALER TIN --> $our_tin" >> $1/purchases/summary
-echo -e "RETURN PERIOD --> $purchases_ret_month" >> $1/purchases/summary
+echo -e "RETURN PERIOD --> $(date "+%b" -d $purchases_ret_month/01/2016)" >> $1/purchases/summary
 echo -e "RETURN TYPE --> $purchases_ret_type" >> $1/purchases/summary
 echo -e "ACCOUNT TYPE --> LOCAL PURCHASES" >> $1/purchases/summary
 echo -e "------------------------------------" >> $1/purchases/summary
@@ -190,7 +190,7 @@ echo -e "------------------------------------" >> $1/purchases/summary
 echo -e "TOTAL RECORD COUNT --> $(wc -l < $1/purchases/purchase_new.csv)" >> $1/purchases/summary
 echo -e "XML FILE NAME --> $(ls $HOME/LP_GEN_M"$purchases_ret_month".xml | basename LP_GEN_M"$purchases_ret_month".xml)" >> $1/purchases/summary
 cat $1/purchases/summary | zenity --text-info --title="e-UPaSS Summary" --checkbox="$(echo -e "Save summary to File\n(File Location : HOME directory)")" \
---ok-label="FINISH" --height=420 --width=370
+--ok-label="FINISH" --height=450 --width=370
 if [ $? -eq 0 ]
 then
 	cp $1/purchases/summary $HOME/purchases_summary.txt

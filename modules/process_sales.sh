@@ -178,7 +178,7 @@ fi
 touch $1/sales/summary
 echo -e "DEALER NAME --> $our_name" >> $1/sales/summary
 echo -e "DEALER TIN --> $our_tin" >> $1/sales/summary
-echo -e "RETURN PERIOD --> $sales_ret_month" >> $1/sales/summary
+echo -e "RETURN PERIOD --> $(date "+%b" -d $sales_ret_month/01/2016)" >> $1/sales/summary
 echo -e "RETURN TYPE --> $sales_ret_type" >> $1/sales/summary
 echo -e "ACCOUNT TYPE --> LOCAL SALES" >> $1/sales/summary
 echo -e "------------------------------------" >> $1/sales/summary
@@ -190,7 +190,7 @@ echo -e "------------------------------------" >> $1/sales/summary
 echo -e "TOTAL RECORD COUNT --> $(wc -l < $1/sales/sale_new.csv)" >> $1/sales/summary
 echo -e "XML FILE NAME --> $(ls $HOME/LS_GEN_M"$sales_ret_month".xml | basename LS_GEN_M"$sales_ret_month".xml)" >> $1/sales/summary
 cat $1/sales/summary | zenity --text-info --title="e-UPaSS Summary" --checkbox="$(echo -e "Save summary to File\n(File Location : HOME directory)")" \
---ok-label="FINISH" --height=420 --width=370
+--ok-label="FINISH" --height=450 --width=370
 if [ $? -eq 0 ]
 then
 	cp $1/sales/summary $HOME/sales_summary.txt

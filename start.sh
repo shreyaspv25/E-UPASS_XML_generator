@@ -11,7 +11,7 @@ FALSE "Local Sales" FALSE "Local Purchases" FALSE "Interstate Purchases" FALSE "
 case $choice in
 		"Local Sales")bash $PWD/modules/process_sales.sh $temp_path;;
 		"Local Purchases")bash $PWD/modules/process_purchases.sh $temp_path;;
-		#"Interstate Purchases")process_interstate_purchases;;
+		"Interstate Purchases")bash $PWD/modules/process_interstate_purchases.sh $temp_path;;
 		#"Interstate Sales")process_interstate_sales;;
 		*)zenity --title="XML" --error --text="Nothing selected ! Exiting..!" --ok-label="Quit";exit 1;;
 esac
