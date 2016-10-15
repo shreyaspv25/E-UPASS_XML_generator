@@ -27,7 +27,5 @@ Icon=$PWD/icon/xml.png
 Exec=$PWD/eupassxmlgen" > /dev/null #$PWD/uploadprocessor.desktop
 #chmod a+x $PWD/uploadprocessor.desktop
 #chmod a+x $PWD/eupassxmlgen
-#chown $(echo $LOGNAME) $PWD/uploadprocessor.desktop
-#chgrp $(echo $LOGNAME) $PWD/uploadprocessor.desktop
 exit
 
