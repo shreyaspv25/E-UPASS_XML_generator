@@ -141,8 +141,8 @@ cat $1/interstate_purchases/purchase_new.csv | sed 's/\//|/g' | awk -F "|" \
 '{
 printf("<ISPurInv>\n\
 <SelTin>%s</SelTin>\n\
-<SelAddr>%s</SelAddr>\n\
 <SelName>%s</SelName>\n\
+<SelAddr>%s</SelAddr>\n\
 <InvNo>%s</InvNo>\n\
 <InvDate>%s-%s-%s</InvDate>\n\
 <NetVal>%.2f</NetVal>\n\
