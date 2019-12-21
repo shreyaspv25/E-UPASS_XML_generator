@@ -12,7 +12,7 @@ case $choice in
 		"Local Sales")bash $PWD/modules/process_sales.sh $temp_path;;
 		"Local Purchases")bash $PWD/modules/process_purchases.sh $temp_path;;
 		"Interstate Purchases")bash $PWD/modules/process_interstate_purchases.sh $temp_path;;
-		"Interstate Sales")zenity --info --text="Module not yet developed Please try some day.";;
+		"Interstate Sales")zenity --info --text="Module not yet developed.";;
 		*)zenity --title="XML" --error --text="Nothing selected ! Exiting..!" --ok-label="Quit";exit 1;;
 esac
 exit 0
